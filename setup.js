@@ -54,7 +54,7 @@ function parseDB(callback) {
       var side_grouped_obj = und.groupBy(vote_group, group_majority);
       side_grouped_obj['date'] = vote_group[0][colToLine('E')];
       side_grouped_obj['name'] = vote_group[0][colToLine('O')];
-      side_grouped_obj['issue'] = vote_group[0][colToLine('AN')];
+      side_grouped_obj['issue'] = vote_group[0][colToLine('AO')];
       side_grouped_obj['court'] = vote_group[0][colToLine('L')];
       return side_grouped_obj;
     }
