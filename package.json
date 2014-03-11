@@ -1,0 +1,21 @@
+{
+  "name": "ScotusBuddies",
+  "version": "0.1.0",
+  "author": "Neal Bhasin",
+  "description": "See who agrees on what in the Supreme Court!",
+  "contributors": [ 
+    {
+      "name": "Neal Bhasin"
+    } 
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thisisneal/ScotusBuddies.git"
+  },
+  "dependencies" : {
+    "express" : ">=3.5.0",
+    "csv"     : ">=0.3.7",
+    "express" : ">=1.6.0"
+  },
+  "license": "CC BY-NC 3.0 US" 
+}
