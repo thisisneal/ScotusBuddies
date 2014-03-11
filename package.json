@@ -13,9 +13,9 @@
     "url": "https://github.com/thisisneal/ScotusBuddies.git"
   },
   "dependencies" : {
-    "express" : ">=3.5.0",
-    "csv"     : ">=0.3.7",
-    "express" : ">=1.6.0"
+    "express"    : ">=3.5.0",
+    "csv"        : ">=0.3.7",
+    "underscore" : ">=1.6.0"
   },
   "license": "CC BY-NC 3.0 US" 
 }
