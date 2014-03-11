@@ -61,8 +61,10 @@ function parseDB(callback) {
     var condensedDB = und.mapValues(case_groupedDB, condense);
     // Remove excess info from cases
     function cleanCase(side_obj) {
-      side_obj['1'] = getJustices(side_obj['1']);
-      side_obj['2'] = getJustices(side_obj['2']);
+      side_obj['dissent'] = getJustices(side_obj['1']);
+      side_obj['majority'] = getJustices(side_obj['2']);
+      delete side_obj['1']; // renamed
+      delete side_obj['2']; // renamed
       delete side_obj['']; // remove recusers
       return side_obj;
     }
@@ -71,26 +73,26 @@ function parseDB(callback) {
   });
 }
 
-// Pull DB from JSON file if possible, otherwise serialize
-fs.readFile(__dirname + '/cleanDB.json', 'utf8', 
-  function (err, data) {
-    if (err) {
-      parseDB(function(db_obj) {
-        console.log('Writing database to JSON file.');
-        fs.writeFile(__dirname + '/cleanDB.json', 
-          JSON.stringify(db_obj, null, 4), logerr);
-        analyze(db_obj);
-      });
-    } else {
-      console.log('Reading database from JSON file.');
-      var db_obj = JSON.parse(data);
-      analyze(db_obj);
+// Prepare JSON db file
+function setup(callback) {
+  // Pull DB from JSON file if possible, otherwise serialize
+  var jsonFilePath = '/public/cleanDB.json';
+  fs.readFile(__dirname + jsonFilePath, 'utf8', 
+    function (err, data) {
+      if (err) {
+        parseDB(function(db_obj) {
+          console.log('Writing database to JSON file.');
+          fs.writeFile(__dirname + jsonFilePath, 
+            JSON.stringify(db_obj, null, 4), logerr);
+          callback(db_obj);
+        });
+      } else {
+        console.log('Reading database from JSON file.');
+        var db_obj = JSON.parse(data);
+        callback(db_obj);
+      }
     }
-  });
-  
-function analyze(db) {
-  console.log('SFTBNWH');
+  );
 }
 
-
-
+exports.setup = setup;
