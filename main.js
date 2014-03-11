@@ -71,8 +71,26 @@ function parseDB(callback) {
   });
 }
 
-parseDB(function(db_obj) {
-  fs.writeFile(__dirname + '/cleanDB.json', JSON.stringify(db_obj, null, 4), logerr);
-});
+// Pull DB from JSON file if possible, otherwise serialize
+fs.readFile(__dirname + '/cleanDB.json', 'utf8', 
+  function (err, data) {
+    if (err) {
+      parseDB(function(db_obj) {
+        console.log('Writing database to JSON file.');
+        fs.writeFile(__dirname + '/cleanDB.json', 
+          JSON.stringify(db_obj, null, 4), logerr);
+        analyze(db_obj);
+      });
+    } else {
+      console.log('Reading database from JSON file.');
+      var db_obj = JSON.parse(data);
+      analyze(db_obj);
+    }
+  });
+  
+function analyze(db) {
+  console.log('SFTBNWH');
+}
+
 
 
